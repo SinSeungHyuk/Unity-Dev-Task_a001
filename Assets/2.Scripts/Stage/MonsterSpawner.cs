@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private List<MonsterDetailsSO> spawnParameter;
+
+    public MonsterSpawnEvent MonsterSpawnEvent { get; private set; }
+
+
+    private void Awake()
     {
-        
+        MonsterSpawnEvent = GetComponent<MonsterSpawnEvent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        MonsterSpawnEvent.CallWaveStart(spawnParameter);
     }
 }
