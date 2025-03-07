@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 7016750400611631704}
   - component: {fileID: 8237990142378162345}
   - component: {fileID: 4595380289150284587}
-  - component: {fileID: -68444185093559071}
   - component: {fileID: 1337276799781111738}
+  - component: {fileID: 3006725914899139910}
+  - component: {fileID: -2674930436301033770}
   m_Layer: 0
   m_Name: ZombieMelee
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 319310827380095937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -67,7 +68,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 319310827380095937}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c72606c2f755196478328808bb7382cf, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -90,7 +91,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.31179345, y: 0.40830112}
+  m_Offset: {x: -0.25078252, y: 0.32341638}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -101,7 +102,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.59912276, y: 0.98515224}
+  m_Size: {x: 0.4771009, y: 0.8153828}
   m_EdgeRadius: 0
 --- !u!50 &4595380289150284587
 Rigidbody2D:
@@ -118,8 +119,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_GravityScale: 4
+  m_Material: {fileID: 6200000, guid: c72606c2f755196478328808bb7382cf, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -130,22 +131,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-68444185093559071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319310827380095937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8adb6c20ebfb99f4389132f9cbfaa4c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  jumpForce: 7
-  gravity: 20
-  jumpSpeed: 2
 --- !u!114 &1337276799781111738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +150,31 @@ MonoBehaviour:
   - {fileID: 4391178048448326450}
   - {fileID: 6012614561082821375}
   - {fileID: 2228757155372488290}
+--- !u!114 &3006725914899139910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319310827380095937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13056ef994024440b230d0bd0da8bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsJumping: 0
+--- !u!114 &-2674930436301033770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319310827380095937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adacb8bbdc7252d40808853d6fe2e9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2094693183665648150
 GameObject:
   m_ObjectHideFlags: 0

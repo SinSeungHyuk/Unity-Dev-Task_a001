@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WheelTest : MonoBehaviour
+public class TruckWheel : MonoBehaviour
 {
-    private TruckTest truck;
+    private Truck truck;
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        truck = GetComponentInParent<TruckTest>();
+        truck = GetComponentInParent<Truck>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, 0, -truck.Speed * 20f * Time.deltaTime);
+        transform.Rotate(0, 0, -truck.Speed * 30f * Time.deltaTime);
     }
 }

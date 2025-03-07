@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+
+
+
 using UnityEngine;
 
-public class Settings : MonoBehaviour
+public static class Settings
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region GAME PARAMETER
+    public static int truckStopCount = 3;
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #region MONSTER PARAMETER
+    public static float jumpForce = 10f;
+    #endregion
+
+
+    #region LAYER MASK
+    public static LayerMask truckLayer = LayerMask.GetMask("Truck"); // 트럭 레이어
+    #endregion
+
+
 }
