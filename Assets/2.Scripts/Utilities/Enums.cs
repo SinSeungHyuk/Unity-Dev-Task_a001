@@ -16,3 +16,13 @@ public enum EMonsterStateCommand
     Attack,
     MoveBackward,
 }
+
+
+public enum ECollisionDir
+{
+    Top,
+    Bottom, 
+    Left, 
+    Right,
+    NoneDir
+}

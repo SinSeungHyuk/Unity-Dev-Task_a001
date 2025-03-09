@@ -8,7 +8,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     // 인스펙터에서 등록할 Pool
     [SerializeField] private List<Pool> poolArray = new List<Pool>();
     private Dictionary<EPool, ObjectPool> poolDic = new Dictionary<EPool, ObjectPool>();
-    private Transform objPoolTransform;
 
     [System.Serializable]
     public struct Pool
@@ -16,6 +15,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         public EPool name;
         public int initialSize;
         public GameObject prefab;
+        public Transform parent; 
     }
 
     private class ObjectPool
@@ -31,15 +31,14 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         base.Awake();
 
         // Awake에서 풀 미리 생성해두기
-        objPoolTransform = this.gameObject.transform;
         for (int i = 0; i < poolArray.Count; ++i)
-            CreatePool(poolArray[i].prefab, poolArray[i].initialSize, poolArray[i].name);
+            CreatePool(poolArray[i].prefab, poolArray[i].initialSize, poolArray[i].name, poolArray[i].parent);
     }
 
-    private void CreatePool(GameObject prefab, int size, EPool name)
+    private void CreatePool(GameObject prefab, int size, EPool name, Transform parent)
     {
         GameObject poolContainer = new GameObject(name.ToString());
-        poolContainer.transform.SetParent(objPoolTransform);
+        poolContainer.transform.SetParent(parent);
 
         ObjectPool objectPool = new ObjectPool();
         for (int i = 0; i < size; ++i)
@@ -68,7 +67,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             {
                 // 풀의 모든 오브젝트가 활성화되었을 때 풀 확장
                 GameObject prefab = poolArray.Find(p => p.name == name).prefab;
-                obj = CreateNewObject(prefab, objPoolTransform.Find(name.ToString()));
+                obj = CreateNewObject(prefab, this.transform);
             }
             else
                 // 대기중인 큐에서 오브젝트 하나 가져오기

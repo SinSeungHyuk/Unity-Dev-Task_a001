@@ -6,11 +6,12 @@ using UnityEngine;
 public static class Settings
 {
     #region GAME PARAMETER
-    public static int truckStopCount = 3;
+    public static float truckStopCount = 4;
     #endregion
 
     #region MONSTER PARAMETER
-    public static float jumpForce = 10f;
+    public static float jumpForce = 15f;
+    public static Vector2 jumpDir = new Vector2(-0.4f,1.2f).normalized;
     #endregion
 
 

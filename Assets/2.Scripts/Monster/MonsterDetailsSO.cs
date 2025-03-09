@@ -7,7 +7,7 @@ using UnityEngine;
 public class MonsterDetailsSO : ScriptableObject
 {
     [Header("Base Monster Details")]
-    public string enemyName;
+    public string monsterName;
     public List<Sprite> sprites; // 부위별 스프라이트
 
     [Header("Base Monster Ability")]

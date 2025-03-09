@@ -15,12 +15,16 @@ public class MoveToTruckState : State<Monster>
     }
     public override void Enter()
     {
-        //monsterCtrl.SetDirX(-1f * monster.Speed);
+        monsterCtrl.Rigid.velocity = Vector2.left * monster.Speed;
+    }
+
+    public override void Update()
+    {
+        // 예시로 Enter로 처음 한번만 바꾸면 이후에 트럭에 의해 velocity가 변할수도 있으므로 업데이트
         monsterCtrl.Rigid.velocity = Vector2.left * monster.Speed;
     }
 
     public override void Exit()
     {
-        //Debug.Log("무빙 끝!");
     }
 }

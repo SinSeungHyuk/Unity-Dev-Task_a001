@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56dafe55e602c1f409b8fd6d8914d4b3, type: 3}
   m_Name: MonsterDetails_Zombie1
   m_EditorClassIdentifier: 
-  enemyName: zombie1
+  monsterName: Zombie1
   sprites:
   - {fileID: 21300000, guid: fb346e1dd6fe243c49c8244bb883d61b, type: 3}
   - {fileID: 21300000, guid: 0eb99cd037b8d42b98850c746c02a526, type: 3}

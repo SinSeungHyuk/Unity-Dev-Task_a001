@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 public class JumpState : State<Monster>
 {
     private MonsterCtrl monsterCtrl;
-    private bool isJumping = true;
+    private bool isJumping;
 
     public bool IsJumping => isJumping;
 
@@ -18,18 +19,17 @@ public class JumpState : State<Monster>
 
     public override void Enter()
     {
-        monsterCtrl.Jump();
         isJumping = true;
-        //StateMachine.ExecuteCommand(EMonsterStateCommand.Move);
+        monsterCtrl.Jump();
     }
 
     public override void Update()
     {
-        isJumping = (monsterCtrl.Rigid.velocity.y > 0) ? true : false;
+        isJumping = monsterCtrl.IsJump;
     }
 
     public override void Exit()
     {
-        Debug.Log("Á¡ÇÁ ¹þ¾î³²");
+        isJumping = false;
     }
 }
