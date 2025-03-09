@@ -20,13 +20,14 @@ public class MonsterCtrl : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Landing Ploatform
-        if (rigid.velocity.y < 0) //내려갈떄만 스캔
+            Debug.DrawRay(rigid.position, Vector3.down * 0.2f,Color.red);
+        if (rigid.velocity.y <= 0) //내려갈떄만 스캔
         {
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.1f);
-            if (rayHit.collider != null)
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, 0.15f);
+            if (hits.Length > 1)
             {
                 isJump = false;
+                return;
             }
         }
     }

@@ -9,6 +9,10 @@ public class AttackState : State<Monster>
     private Monster monster;
     private MonsterCtrl monsterCtrl;
 
+    private bool isAttack;
+
+    public bool IsAttack => isAttack;
+
 
     protected override void Awake()
     {
@@ -20,6 +24,7 @@ public class AttackState : State<Monster>
     {
         // 공격 애니메이션 재생
         StateMachineOwner.Animator.SetBool("IsAttacking", true);
+        isAttack = true;
     }
 
     public override void Update()
@@ -32,5 +37,6 @@ public class AttackState : State<Monster>
     {
         // 공격 애니메이션 종료
         StateMachineOwner.Animator.SetBool("IsAttacking", false);
+        isAttack = false;
     }
 }

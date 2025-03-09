@@ -18,6 +18,7 @@ public class ZombieStateMachine : MonsterStateMachine<Monster>
     {
         // 이동 -> 점프 / 공격
         MakeTransition<MoveToTruckState, JumpState>(EMonsterStateCommand.Jump);
+        //MakeTransition<MoveToTruckState, AttackState>(EMonsterStateCommand.Attack, state => !(state as AttackState).IsAttack);
         MakeTransition<MoveToTruckState, AttackState>(EMonsterStateCommand.Attack);
         //MakeTransition<MoveToTruckState, MoveToBackwardState>(EMonsterStateCommand.MoveBackward);
 
@@ -32,6 +33,12 @@ public class ZombieStateMachine : MonsterStateMachine<Monster>
         MakeTransition<MoveToBackwardState, MoveToTruckState>(EMonsterStateCommand.Move);
     }
 
+    public bool IsMoveToTruckState()
+        => GetCurrentStateType() == typeof(MoveToTruckState);
+
     public bool IsJumpState()
         => GetCurrentStateType() == typeof(JumpState);
+
+    public bool IsAttackState()
+    => GetCurrentStateType() == typeof(AttackState);
 }
