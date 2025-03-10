@@ -27,11 +27,11 @@ public class MoveToBackwardState : State<Monster>
     {
         cts = new CancellationTokenSource();
         elapsedTime = 0f;
-        targetTime = 1.5f;
+        targetTime = 0.4f;
 
         // ** 트럭에 상대적인 x좌표 **가 뒤로 이동해야하므로 현재 트럭과의 상대적인 x포지션을 받아옴
         originX = StateMachineOwner.gameObject.transform.localPosition.x;
-        targetX = originX + 1f;
+        targetX = originX + 0.75f;
 
         MoveToBackwardRoutine().Forget();
     }
@@ -44,8 +44,6 @@ public class MoveToBackwardState : State<Monster>
 
     private async UniTask MoveToBackwardRoutine()
     {
-        monsterCtrl.Rigid.mass = 100f;
-
         while (elapsedTime < targetTime)
         {
             await UniTask.Yield(cancellationToken: cts.Token);
@@ -57,8 +55,6 @@ public class MoveToBackwardState : State<Monster>
             // 만약 위에있던 몬스터일 경우 밑으로 떨어지면서 뒤로 가야하므로 x만 조정
             monsterCtrl.transform.localPosition = new Vector2(newX, monsterCtrl.transform.localPosition.y);
         }
-
-        monsterCtrl.Rigid.mass = 1f;
 
         // 뒤로 이동이 끝나면 처음 상태로 전이
         StateMachine.ExecuteCommand(EMonsterStateCommand.Move);

@@ -11,7 +11,6 @@ public class Truck : MonoBehaviour
 
     private float collisionCount = 0;
     private float currentSpeed;
-    private Vector2 currentPos;
 
     public float Speed => currentSpeed;
 
@@ -28,36 +27,20 @@ public class Truck : MonoBehaviour
         rigid.velocity = dir * currentSpeed;
     }
 
-    //public void SetSpeed(bool isCollisionEnter)
-    //{
-    //    collisionCount = (isCollisionEnter) ? collisionCount+1 : collisionCount-1;
-
-    //    if (collisionCount >= Settings.truckStopCount)
-    //    {
-    //        currentSpeed = 0f;
-    //        return;
-    //    }
-
-    //    currentSpeed = speed * (1 - (float)collisionCount * 0.3f);
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Monster>(out var monster))
         {
-
             collisionCount = Mathf.Clamp(collisionCount + 1, 0, Settings.truckStopCount);
 
             SetSpeed();
         }
     }
 
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Monster>(out var monster))
         {
-
             collisionCount = Mathf.Clamp(collisionCount - 1, 0, Settings.truckStopCount);
 
             SetSpeed();
@@ -67,5 +50,10 @@ public class Truck : MonoBehaviour
     private void SetSpeed()
     {
         currentSpeed = speed * (1f - (float)(collisionCount / Settings.truckStopCount));
+
+        if (collisionCount == Settings.truckStopCount) 
+            rigid.constraints |= RigidbodyConstraints2D.FreezePositionX;
+        else
+            rigid.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
     }
 }

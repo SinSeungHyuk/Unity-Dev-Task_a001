@@ -18,7 +18,7 @@ public class StateTransition<StateOwner>
     public State<StateOwner> ToState { get; private set; }
     // 전이 명령어 (enum으로 사용할 예정)
     public int TransitionCommand { get; private set; }
-    // 전이 가능한지 여부 (전이함수가 없거나 FromState로 가는게 true일 경우)
+    // 위에 있는 Func<>의 결과가 true일 경우 전이가능
     public bool IsTransferable => transitionCondition == null || transitionCondition.Invoke(FromState);
 
 

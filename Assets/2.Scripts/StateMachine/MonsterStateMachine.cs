@@ -13,8 +13,6 @@ public abstract class MonsterStateMachine<Owner> : MonoBehaviour
     /// </summary>
 
 
-    // 스테이트 변경될때 호출될 이벤트
-    // <스테이트머신, 새 스테이트, 이전 스테이트, 레이어>
     public event Action<StateMachine<Owner>, State<Owner>, State<Owner>> OnStateChanged;
 
     private readonly StateMachine<Owner> stateMachine = new();

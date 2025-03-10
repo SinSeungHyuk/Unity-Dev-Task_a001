@@ -26,8 +26,6 @@ public class Monster : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, Vector3.up, Color.red);
-
         // 공격중일때만 뒷무빙 상태로 전이하므로 최적화를 위해 현재상태 검사
         if (StateMachine.IsAttackState() == true)
         {
@@ -88,67 +86,4 @@ public class Monster : MonoBehaviour
         // 공격 함수
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.TryGetComponent<Truck>(out var truck))
-    //    {
-    //        // 트럭과 충돌시 공격상태로 전이
-    //        StateMachine.ExecuteCommand(EMonsterStateCommand.Attack);
-    //    }
-
-    //    // 같은 레이어 오브젝트끼리 부딪혔을때 (같은 라인에 있는 몬스터)
-    //    if (collision.gameObject.layer == this.gameObject.layer)
-    //    {
-    //        if (CheckCollisionDir(collision.gameObject) == ECollisionDir.Top)
-    //            StateMachine.ExecuteCommand(EMonsterStateCommand.MoveBackward);
-    //    }
-
-    //    //if (StateMachine.IsJumpState())
-    //    //    StateMachine.ExecuteCommand(EMonsterStateCommand.Move); // 점프중일때 충돌하면 점프 종료 
-    //}
-
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    // 다른 상태에서 트럭과 충돌을 이미 했어도 공격상태로 전이되야하므로 Stay에서 검사
-    //    if (collision.gameObject.TryGetComponent<Truck>(out var truck))
-    //    {
-    //        StateMachine.ExecuteCommand(EMonsterStateCommand.Attack);
-    //    }
-
-    //    if (collision.gameObject.layer == this.gameObject.layer)
-    //    {
-    //        if (CheckCollisionDir(collision.gameObject) == ECollisionDir.Top)
-    //            StateMachine.ExecuteCommand(EMonsterStateCommand.MoveBackward);
-    //    }
-    //}
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.layer == this.gameObject.layer)
-    //    {
-    //        if (CheckCollisionDir(collision.gameObject) == ECollisionDir.Left)
-    //            StateMachine.ExecuteCommand(EMonsterStateCommand.Jump);
-    //    }
-    //}
-
-    //private ECollisionDir CheckCollisionDir(GameObject other)
-    //{
-    //    Vector2 dir = (other.transform.position - this.transform.position).normalized;
-
-    //    float dirX = Mathf.Abs(dir.x);
-    //    float dirY = Mathf.Abs(dir.y);
-
-    //    if (dirX > dirY)
-    //    {
-    //        if (dir.x < 0)
-    //            return ECollisionDir.Left;
-    //    }
-    //    else if (dirX < dirY)
-    //    {
-    //        if (dir.y > 0)
-    //            return ECollisionDir.Top;
-    //    }
-
-    //    return ECollisionDir.NoneDir;
-    //}
 }

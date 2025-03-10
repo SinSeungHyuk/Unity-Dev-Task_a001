@@ -53,10 +53,10 @@ public class MonsterSpawn : MonoBehaviour
             // 랜덤 시간마다 스폰 (임의코드)
             while (true)
             {
-                RandomSpawn(spawnParameter);
-
-                int delayTime = Random.Range(2000, 5000);
+                int delayTime = Random.Range(1000, 4000);
                 await UniTask.Delay(delayTime, cancellationToken: cts.Token);
+
+                RandomSpawn(spawnParameter);
             }
         }
         catch (OperationCanceledException)

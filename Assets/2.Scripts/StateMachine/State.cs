@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class State<StateOwner>
 {
-    // TOwner는 State 소유자의 Type (Skill, Entity ...)
-    // StateMachine의 TOwner과 일치해야함
+    // 이 상태의 스테이트머신과 스테이트머신의 소유자(몬스터)
     public StateMachine<StateOwner> StateMachine { get; private set; }
     public StateOwner StateMachineOwner { get; private set; }
 
@@ -28,9 +27,4 @@ public abstract class State<StateOwner>
     public virtual void Update() { }
     // State 나갈때
     public virtual void Exit() { }
-
-    //// StateMachine 클래스의 SendMessage 함수로 호출할 함수
-    //// 스테이트머신에서 이 스테이트에 특정 메세지(enum)을 보낼때 사용
-    //public virtual bool OnReceiveMessage(int message, object data)
-    //    => false;
 }
