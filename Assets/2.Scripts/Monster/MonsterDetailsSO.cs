@@ -13,4 +13,7 @@ public class MonsterDetailsSO : ScriptableObject
     [Header("Base Monster Ability")]
     public float speed;
     public float maxHp;
+
+    [Header("Base Monster Configuration")]
+    public Material takeDamageMaterial;
 }

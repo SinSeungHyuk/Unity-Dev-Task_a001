@@ -1,8 +1,11 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.U2D;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Monster : MonoBehaviour
@@ -72,7 +75,7 @@ public class Monster : MonoBehaviour
         StateMachine.InitializeStateMachine(this);
     }
 
-    void SetLayerRecursively(GameObject obj, int layer)
+    private void SetLayerRecursively(GameObject obj, int layer)
     {
         obj.layer = layer;
         foreach (Transform child in obj.transform)
@@ -81,9 +84,44 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        var hitText = ObjectPoolManager.Instance.Get(EPool.TxtHitUI, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+        hitText.GetComponent<TxtHitUI>().InitializeTxtHitUI(damage);
+
+        TakeDamageEffect().Forget();
+    }
+
     private void OnAttack()
     {
         // 공격 함수
     }
 
+
+    private async UniTaskVoid TakeDamageEffect()
+    {
+        try
+        {
+            // 피격시 0.1초 동안 흰색 머테리얼로 변경
+
+            Material prevMaterial = sprites[0].material;
+            ChangeMaterial(MonsterData.takeDamageMaterial);
+
+            await UniTask.Delay(100);
+
+            ChangeMaterial(prevMaterial);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"TakeDamageEffect - {ex.Message}");
+        }
+    }
+
+    private void ChangeMaterial(Material material)
+    {
+        foreach (var sprite in sprites)
+        {
+            sprite.material = material;
+        }
+    }
 }

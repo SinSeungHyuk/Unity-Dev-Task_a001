@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fab4eb26095b14984b6e5cf59bf58201, type: 3}
   speed: 3
   maxHp: 0
+  takeDamageMaterial: {fileID: 2100000, guid: 9f448b1e060c64644b5ed45f6d2e0e5e, type: 2}
