@@ -16,6 +16,7 @@ public enum EMonsterStateCommand
     Jump,
     Attack,
     MoveBackward,
+    Die,
 }
 
 

@@ -75,7 +75,7 @@ public class StateMachine<StateOwner>
         newStateData.State.Enter();
 
         // State가 전이되었음을 알림
-        OnStateChanged?.Invoke(this, newStateData.State, prevState.State);
+        OnStateChanged?.Invoke(this, newStateData.State, prevState?.State);
     }
 
     private void ChangeState(State<StateOwner> newState)

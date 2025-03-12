@@ -11,7 +11,7 @@ public static class Settings
     #endregion
 
     #region MONSTER PARAMETER
-    public static float jumpForce = 20f;
+    public static float jumpForce = 23f;
     public static Vector2 jumpDir = new Vector2(-0.4f,1.2f).normalized;
     #endregion
 

@@ -12,11 +12,13 @@ public class Monster : MonoBehaviour
 {
     [SerializeField] private List<SpriteRenderer> sprites;
     private LayerMask layerMask;
+    private float hp; // 임시로 이곳에 hp 만들어줌
 
     public MonsterCtrl MonsterCtrl {  get; private set; }
     public ZombieStateMachine StateMachine { get; private set; }
     public MonsterDetailsSO MonsterData { get; private set; }
     public Animator Animator { get; private set; }
+    public PolygonCollider2D Hitbox { get; private set; }
     public float Speed {  get; private set; }
 
 
@@ -25,6 +27,10 @@ public class Monster : MonoBehaviour
     {
         MonsterCtrl = GetComponent<MonsterCtrl>();
         Animator = GetComponent<Animator>();
+        Hitbox = GetComponent<PolygonCollider2D>();
+        // 임의로 ZombieStateMachine를 넣어줌 => 원래라면 monsterData를 통해 적절한 상태머신을 받아와야함
+        StateMachine = GetComponent<ZombieStateMachine>();
+        StateMachine.InitializeStateMachine(this);
     }
 
     void FixedUpdate()
@@ -65,14 +71,15 @@ public class Monster : MonoBehaviour
     {
         sprites.Zip(monsterData.sprites, (sprite, dataSprite) => sprite.sprite = dataSprite).ToList();
 
-        MonsterData = monsterData;
         SetLayerRecursively(gameObject, lane); // 상,중,하단 중 각자 스폰된 라인에 맞는 레이어 적용
         layerMask = 1 << lane; // 매개변수로 받은건 단일 레이어. 레이캐스트에 사용하려면 비트연산으로 변환해야함
-        Speed = monsterData.speed;
 
-        // 임의로 ZombieStateMachine를 넣어줌 => 원래라면 monsterData를 통해 적절한 상태머신을 받아와야함
-        StateMachine = GetComponent<ZombieStateMachine>();
-        StateMachine.InitializeStateMachine(this);
+        MonsterData = monsterData;
+        Speed = monsterData.speed;
+        hp = monsterData.maxHp;
+
+        // 몬스터가 최초로 스폰되거나 사망했었을 경우 -> 다시 초기화되면서 이동상태부터 시작해야함
+        StateMachine.SetUpDefaultState();
     }
 
     private void SetLayerRecursively(GameObject obj, int layer)
@@ -89,12 +96,21 @@ public class Monster : MonoBehaviour
         var hitText = ObjectPoolManager.Instance.Get(EPool.TxtHitUI, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         hitText.GetComponent<TxtHitUI>().InitializeTxtHitUI(damage);
 
+        hp -= damage;
+        if (hp <= 0)
+            StateMachine.ExecuteCommand(EMonsterStateCommand.Die);
+
         TakeDamageEffect().Forget();
     }
 
     private void OnAttack()
     {
         // 공격 함수
+    }
+
+    private void OnDie()
+    {
+        ObjectPoolManager.Instance.Release(gameObject, EPool.Monster);
     }
 
 

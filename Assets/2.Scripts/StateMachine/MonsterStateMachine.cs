@@ -33,12 +33,11 @@ public abstract class MonsterStateMachine<Owner> : MonoBehaviour
         // 1. 스테이머신 초기화 -> owner(monster)를 넣어서 스테이트머신의 주인을 알려줌
         // 2. 스테이트와 트랜지션들 추가 -> 상속받은 자식클래스에서 구현한대로 상태,트랜지션을 추가해줌
         // 3. 상태와 트랜지션은 추가되면서 스테이트머신이 가지고 있는 주인을 바탕으로 생성됨
-        // 4. 맨처음 시작되어야하는 기본상태 시작
+        // 4. 맨처음 시작되어야하는 기본상태는 외부 클래스에 의해 직접 제어
 
         stateMachine.InitializeStateMachine(owner);
         AddStates();
         MakeTransitions();
-        stateMachine.SetUpDefaultState();
 
         stateMachine.OnStateChanged += (_, newState, prevState)
             => OnStateChanged?.Invoke(stateMachine, newState, prevState);
@@ -86,6 +85,8 @@ public abstract class MonsterStateMachine<Owner> : MonoBehaviour
     public State<Owner> GetCurrentState() => stateMachine.GetCurrentState();
 
     public Type GetCurrentStateType() => stateMachine.GetCurrentStateType();
+
+    public void SetUpDefaultState() => stateMachine.SetUpDefaultState();
     #endregion
 
 

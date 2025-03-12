@@ -21,5 +21,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39290a0dcb1b6425d9bea6fb1313d89a, type: 3}
   - {fileID: 21300000, guid: e2b58f3574efd48c28732c25b27b6435, type: 3}
   speed: 1
-  maxHp: 0
+  maxHp: 10
   takeDamageMaterial: {fileID: 2100000, guid: 9f448b1e060c64644b5ed45f6d2e0e5e, type: 2}

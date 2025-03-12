@@ -174,4 +174,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: OnDie
+    data: 
+    objectReferenceParameter: {fileID: 319310827380095937, guid: e48e7c461a85c463cba5a999afb91a67, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

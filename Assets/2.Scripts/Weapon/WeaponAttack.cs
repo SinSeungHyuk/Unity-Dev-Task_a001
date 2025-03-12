@@ -62,7 +62,7 @@ public class WeaponAttack : MonoBehaviour
          * 1. 원을 그려서 가장 가까운 몬스터를 찾기
          * 2. 그 몬스터를 향한 방향벡터가 무기 발사의 기준벡터
          * 3. 해당 벡터를 기준으로 무기의 발사각도와 비교하여 범위에 포함되어있는지 검사
-         * 4. 범위에 포함된 몬스터들에게 데미지 주기
+         * 4. 범위에 포함된 몬스터들에게 데미지 주기 (or 레이를 쏴서 처음맞는(위에있는) 몬스터들에게만 데미지 주기)
          */
 
         // 1. 원 범위 내의 모든 몬스터 찾기
@@ -105,8 +105,17 @@ public class WeaponAttack : MonoBehaviour
             // Vector2.Angle() 함수는 내부적으로 Acos을 사용하여 연산량이 더 크다고함 (따라서 이 방법 선택)
             if (Vector2.Dot(dirToMonster, dirToTarget) >= weaponCosAngle)
             {
-                // 부채꼴 범위 내에 있음
-                monsters[i].GetComponent<Monster>().TakeDamage(weapon.WeaponDamage);
+                /// 부채꼴 범위 내에 있음
+
+                // 1. 해당 부채꼴 범위 내에 있으면 모든 적들에게 데미지 주기 (관통)
+                //monsters[i].GetComponent<Monster>().TakeDamage(weapon.WeaponDamage);
+
+                // 2. 범위 내에서 가장 위에있는 적들에게만 데미지 주기 (관통 X)
+                var hit = Physics2D.Raycast(transform.position, dirToTarget, Settings.weaponRadius, Settings.monsterLayer);
+                if (hit.collider == monsters[i])
+                {
+                    monsters[i].GetComponent<Monster>().TakeDamage(weapon.WeaponDamage);
+                }
             }
         }
     }

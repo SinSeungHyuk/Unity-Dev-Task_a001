@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   weaponDamage: 5
-  weaponAngle: 10
-  weaponFireRate: 2
+  weaponAngle: 15
+  weaponFireRate: 1.5
